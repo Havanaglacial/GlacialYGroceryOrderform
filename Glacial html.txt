@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        h2 { text-align: center; }
+        label { font-weight: bold; display: block; margin-top: 10px; }
+        select, input, button { width: 100%; padding: 10px; margin-top: 5px; }
+        .total { font-size: 18px; font-weight: bold; color: green; margin-top: 10px; }
+    </style>
+    <script>
+        function updateTotal() {
+            let total = 0;
+            document.querySelectorAll('.product:checked').forEach(item => {
+                total += parseFloat(item.getAttribute('data-price'));
+            });
+            document.getElementById('total').innerText = "Total: ₱" + total.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Order Form</h2>
+
+    <!-- Product Selection -->
+    <label>Choose Your Items:</label>
+    <div>
+        <input type="checkbox" class="product" data-price="60" onclick="updateTotal()"> Ottogi Jin Ramen Mild (Cup) - ₱60 <br>
+        <input type="checkbox" class="product" data-price="60" onclick="updateTotal()"> Ottogi Jin Ramen Spicy (Cup) - ₱60 <br>
+        <input type="checkbox" class="product" data-price="70" onclick="updateTotal()"> Nongshim Beef Bulgogi - ₱70 <br>
+        <input type="checkbox" class="product" data-price="50" onclick="updateTotal()"> Nongshim Shin Ramen - ₱50 <br>
+        <input type="checkbox" class="product" data-price="150" onclick="updateTotal()"> Pork Belly - ₱150 <br>
+        <input type="checkbox" class="product" data-price="90" onclick="updateTotal()"> So Nice Soju (Original) - ₱90 <br>
+        <input type="checkbox" class="product" data-price="120" onclick="updateTotal()"> Worijip Kimchi - ₱120 <br>
+        <input type="checkbox" class="product" data-price="100" onclick="updateTotal()"> Pepero - ₱100 <br>
+    </div>
+
+    <!-- Limited-Time Offer -->
+    <label>
+        <input type="checkbox"> Spend ₱500+? Get a **FREE Iced Tea**! ✅
+    </label>
+
+    <!-- Delivery Time -->
+    <label for="delivery">Choose Delivery Time:</label>
+    <select id="delivery">
+        <option>ASAP (1 hour)</option>
+        <option>Schedule for later</option>
+        <option>Next-day delivery</option>
+    </select>
+
+    <!-- GCash Payment Upload -->
+    <label for="gcash">Upload GCash Payment Proof:</label>
+    <input type="file" id="gcash" accept="image/*">
+
+    <!-- Feedback -->
+    <label>How did you hear about us?</label>
+    <select>
+        <option>Facebook</option>
+        <option>Word of mouth</option>
+        <option>Other</option>
+    </select>
+
+    <!-- Total Price -->
+    <div class="total" id="total">Total: ₱0.00</div>
+
+    <!-- Submit Button -->
+    <button onclick="alert('Order Submitted!')">Submit Order</button>
+</div>
+
+</body>
+</html>
